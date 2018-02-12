@@ -1,6 +1,7 @@
 # AWS / Terraform Bastion Network
 
 This project puts together a general purpose quarantined private VPC peered to a public VPC accessible only from a bastion host.
+The quarantined private VPC is configured with 2 VPC endpoint gateways for DynamoDB and S3 and an interface gateway for Kinesis Streams.
 
 The provisioning of all the infrastructure and services is done using [Terraform](https://www.terraform.io/).
 All compute servers use the T2 micros with Amazon Linux, note that the architecture shown below requires a region with a minimum of 2 availability zones.

@@ -178,6 +178,13 @@ resource "aws_security_group" "sg_2" {
     security_groups            = ["${aws_security_group.sg_1.id}"]
   }
 
+  ingress {
+    from_port                  = 0
+    to_port                    = 0
+    protocol                   = "-1"
+    self                       = true
+  }
+
   egress {
     from_port                  = 0
     to_port                    = 0
@@ -188,4 +195,29 @@ resource "aws_security_group" "sg_2" {
   tags {
     Name                       = "${var.environment_name}_sg_2"
   }
+}
+
+
+################  VPC Endpoints  ################
+
+
+resource "aws_vpc_endpoint" "kinesis-streams" {
+  vpc_id                       = "${aws_vpc.vpc_2.id}"
+  service_name                 = "com.amazonaws.${var.aws_region}.kinesis-streams"
+  vpc_endpoint_type            = "Interface"
+  subnet_ids                   = ["${aws_subnet.sn_2.id}"]
+  security_group_ids           = ["${aws_security_group.sg_2.id}"]
+  private_dns_enabled          = true
+}
+
+resource "aws_vpc_endpoint" "dynamodb" {
+  vpc_id                       = "${aws_vpc.vpc_2.id}"
+  service_name                 = "com.amazonaws.${var.aws_region}.dynamodb"
+  route_table_ids              = ["${aws_route_table.rt_2.id}"]
+}
+
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id                       = "${aws_vpc.vpc_2.id}"
+  service_name                 = "com.amazonaws.${var.aws_region}.s3"
+  route_table_ids              = ["${aws_route_table.rt_2.id}"]
 }
