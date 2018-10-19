@@ -49,7 +49,7 @@ Run the following command in the root of the terraform source _src/main/terrafor
 Note that it is recommended that you override the default values for _aws_profile_ and the _bastion_network_cidr_
 
 ```commandline
-terraform plan -var "aws_key_name=your-key-name" -var "aws_region=us-east-1"
+terraform plan -var "aws_key_name=your-key-name" -var "aws_profile=your-profile" -var "aws_region=us-east-1"
 ```
 
 The output of this command will detail all the resources that will be created once applied.
@@ -57,7 +57,7 @@ Note that it is recommended that you override the default values for _aws_region
 and the _bastion_network_cidr_ (0.0.0.0/0) e.g.
 
 ```commandline
-terraform plan -var "aws_key_name=you-key" -var "aws_profile=bastion-lab" -var "bastion_network_cidr=199.250.200.0/24"
+terraform plan -var "aws_key_name=you-key" -var "aws_profile=your-profile" -var "aws_profile=bastion-lab" -var "bastion_network_cidr=199.250.200.0/24"
 ```
 
 ### Apply
@@ -65,7 +65,7 @@ terraform plan -var "aws_key_name=you-key" -var "aws_profile=bastion-lab" -var "
 Once you are happy with the plan apply and decided on what variables to override you can apply your plan e.g.
 
 ```commandline
-terraform apply -var "aws_key_name=you-key" -var "aws_profile=bastion-lab" -var "bastion_network_cidr=199.250.200.0/24"
+terraform apply -var "aws_key_name=you-key" -var "aws_profile=your-profile" -var "bastion_network_cidr=199.250.200.0/24"
 ```
 
 ### Testing
